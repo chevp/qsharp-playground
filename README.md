@@ -1,4 +1,4 @@
-# q-sharp-playground
+# qsharp-playground
 
 Q# proof-of-concepts exploring **hosting and interop patterns** for the
 [Microsoft Quantum Development Kit (QDK)](https://learn.microsoft.com/azure/quantum/).
