@@ -1,0 +1,2 @@
+qsharp>=1.10,<2
+azure-quantum>=2.0,<3

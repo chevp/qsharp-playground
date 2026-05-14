@@ -1,0 +1,7 @@
+{
+  "author": "Patrice Chevillat",
+  "license": "LicenseRef-Proprietary-Chevillat",
+  "lints": [
+    { "lint": "needlessOperation", "level": "warn" }
+  ]
+}

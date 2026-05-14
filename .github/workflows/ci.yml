@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  # poc-01, poc-04, poc-06: modern QDK — minimal smoke check that the
+  # qsharp package can parse the .qs files.
+  qsharp-parse:
+    name: Modern QDK parse check (poc-01, poc-03, poc-04, poc-05, poc-06)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install "qsharp>=1.10,<2"
+      - name: Parse each .qs source
+        run: |
+          set -euo pipefail
+          for f in \
+            poc-01-standalone-modern-qdk/src/Main.qs \
+            poc-03-python-host/bell.qs \
+            poc-05-azure-quantum/bell.qs \
+            poc-06-min-launcher/Main.qs; do
+            echo "==> $f"
+            python -c "import qsharp; qsharp.eval(open('$f').read())"
+          done
+
+  # poc-02: classic QDK is on .NET 6.0 (out of support on GitHub-hosted runners
+  # since 2024-11). The job stays here as a stub so adding the .NET 6 install
+  # path later is a one-line change.
+  csharp-host:
+    name: poc-02 csharp-host (skipped — needs .NET 6)
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Classic QDK requires .NET 6.0. Re-enable once a .NET 6 install step is wired up."
+
+  # poc-04: notebook parse — verify the .ipynb is valid JSON with the
+  # expected qsharp cell magic, without executing it.
+  notebook-lint:
+    name: poc-04 notebook JSON lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: |
+          python -c "
+          import json, sys
+          nb = json.load(open('poc-04-jupyter-notebook/bell.ipynb'))
+          assert any('%%qsharp' in ''.join(c['source']) for c in nb['cells'] if c['cell_type']=='code'), 'no %%qsharp cell found'
+          print('notebook OK')
+          "

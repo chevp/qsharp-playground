@@ -1,0 +1,22 @@
+# .NET
+bin/
+obj/
+*.user
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Q# / QDK
+qsharp.log
+*.qir
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/

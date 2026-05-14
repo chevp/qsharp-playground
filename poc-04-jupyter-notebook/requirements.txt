@@ -1,0 +1,4 @@
+qsharp>=1.10,<2
+qsharp-widgets>=1.10,<2
+jupyterlab>=4.0
+matplotlib>=3.8
