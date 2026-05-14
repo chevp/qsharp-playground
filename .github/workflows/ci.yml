@@ -9,7 +9,7 @@ jobs:
   # poc-01, poc-04, poc-06: modern QDK — minimal smoke check that the
   # qsharp package can parse the .qs files.
   qsharp-parse:
-    name: Modern QDK parse check (poc-01, poc-03, poc-04, poc-05, poc-06)
+    name: Modern QDK parse check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +33,7 @@ jobs:
   # since 2024-11). The job stays here as a stub so adding the .NET 6 install
   # path later is a one-line change.
   csharp-host:
-    name: poc-02 csharp-host (skipped — needs .NET 6)
+    name: poc-02 csharp-host
     runs-on: ubuntu-latest
     steps:
       - run: echo "Classic QDK requires .NET 6.0. Re-enable once a .NET 6 install step is wired up."
